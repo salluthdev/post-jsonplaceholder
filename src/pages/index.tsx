@@ -1,4 +1,5 @@
 import { Navbar } from "@/components/common/layouts";
+import CardWrapper from "@/components/pages/CardWrapper";
 import Head from "next/head";
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
       </Head>
       <main>
         <Navbar />
+        <CardWrapper />
       </main>
     </>
   );
