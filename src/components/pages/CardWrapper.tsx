@@ -19,7 +19,7 @@ export default function CardWrapper() {
               key={item.id}
               className="min-w-[360px] flex-1 border-[2px] border-[aqua] rounded-sm"
             >
-              <Card title={item.title} content={item.body} />
+              <Card title={item.title} content={item.body} id={item.id} />
             </div>
           );
         })}
