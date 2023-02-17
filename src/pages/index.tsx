@@ -1,3 +1,4 @@
+import { Navbar } from "@/components/common/layouts";
 import Head from "next/head";
 
 export default function Home() {
@@ -13,9 +14,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div className="w-40 h-40 bg-stone-800">
-          <h1 className="text-[aqua]">Halo!</h1>
-        </div>
+        <Navbar />
       </main>
     </>
   );

@@ -10,4 +10,11 @@
 body {
   width: 100%;
   overflow-x: hidden;
+  font-family: "Noto Sans", sans-serif;
+}
+.wrapper {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
 }
