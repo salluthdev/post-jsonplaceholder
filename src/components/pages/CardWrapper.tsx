@@ -12,11 +12,14 @@ export default function CardWrapper() {
 
   return (
     <div className="wrapper">
-      <div className="flex gap-4 py-6">
+      <div className="flex flex-wrap justify-between gap-4 py-10">
         {postData.map((item: any) => {
           return (
-            <div key={item.id}>
-              <Card title={item.title} />
+            <div
+              key={item.id}
+              className="min-w-[360px] flex-1 border-[2px] border-[aqua] rounded-sm"
+            >
+              <Card title={item.title} content={item.body} />
             </div>
           );
         })}
