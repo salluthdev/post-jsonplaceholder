@@ -1,19 +1,35 @@
 import { useEffect, useState } from "react";
 import { Button, Card } from "../common";
 
+type Post = {
+  id: number;
+  title: string;
+  body: string;
+};
+
 export default function CardWrapper() {
-  const [postData, setPostData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [nextPageLength, setNextPageLength] = useState(0);
+  const [postData, setPostData] = useState<Post[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [nextPageLength, setNextPageLength] = useState<number>(0);
 
   useEffect(() => {
-    fetch(
-      `https://jsonplaceholder.typicode.com/posts?_start=${
-        (currentPage - 1) * 10
-      }&_limit=10`
-    )
-      .then((res) => res.json())
-      .then((data) => setPostData(data));
+    // fetch the postData in active page
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch(
+          `https://jsonplaceholder.typicode.com/posts?_start=${
+            (currentPage - 1) * 10
+          }&_limit=10`
+        );
+        const data = await response.json();
+        setPostData(data);
+      } catch (error) {
+        console.log("Error while fetching data: ", error);
+      }
+    };
+    fetchPosts();
+
+    // fetch the postData length in the next page
     fetch(
       `https://jsonplaceholder.typicode.com/posts?_start=${
         currentPage * 10
@@ -26,7 +42,7 @@ export default function CardWrapper() {
   return (
     <div className="wrapper">
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 justify-between gap-4 py-10">
-        {postData.map((item: any) => {
+        {postData.map((item: Post) => {
           return (
             <div
               key={item.id}
@@ -52,11 +68,25 @@ export default function CardWrapper() {
 
           <div className="flex items-end gap-2">
             {currentPage > 1 && (
-              <Button variant="outline">{currentPage - 1}</Button>
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setCurrentPage(currentPage - 1);
+                }}
+              >
+                {currentPage - 1}
+              </Button>
             )}
             <Button>{currentPage}</Button>
             {nextPageLength !== 0 && (
-              <Button variant="outline">{currentPage + 1}</Button>
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setCurrentPage(currentPage + 1);
+                }}
+              >
+                {currentPage + 1}
+              </Button>
             )}
           </div>
           {nextPageLength !== 0 && (
