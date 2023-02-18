@@ -3,16 +3,25 @@ import { Button, Card } from "../common";
 
 export default function CardWrapper() {
   const [postData, setPostData] = useState([]);
-  const [idStart, setIdStart] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+  const [nextPageLength, setNextPageLength] = useState(0);
 
   useEffect(() => {
     fetch(
-      `https://jsonplaceholder.typicode.com/posts?_start=${idStart}&_limit=10`
+      `https://jsonplaceholder.typicode.com/posts?_start=${
+        (currentPage - 1) * 10
+      }&_limit=10`
     )
       .then((res) => res.json())
       .then((data) => setPostData(data));
-  }, [idStart]);
+    fetch(
+      `https://jsonplaceholder.typicode.com/posts?_start=${
+        currentPage * 10
+      }&_limit=10`
+    )
+      .then((res) => res.json())
+      .then((data) => setNextPageLength(data.length));
+  }, [currentPage]);
 
   return (
     <div className="wrapper">
@@ -34,25 +43,26 @@ export default function CardWrapper() {
             <Button
               variant="outline"
               onClick={() => {
-                setIdStart(idStart - 10);
                 setCurrentPage(currentPage - 1);
               }}
             >
               Prev
             </Button>
           )}
+
           <div className="flex items-end gap-2">
             {currentPage > 1 && (
               <Button variant="outline">{currentPage - 1}</Button>
             )}
             <Button>{currentPage}</Button>
-            <Button variant="outline">{currentPage + 1}</Button>
+            {nextPageLength !== 0 && (
+              <Button variant="outline">{currentPage + 1}</Button>
+            )}
           </div>
-          {postData !== null && (
+          {nextPageLength !== 0 && (
             <Button
               variant="outline"
               onClick={() => {
-                setIdStart(idStart + 10);
                 setCurrentPage(currentPage + 1);
               }}
             >
