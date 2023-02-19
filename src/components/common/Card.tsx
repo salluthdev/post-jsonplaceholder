@@ -30,9 +30,12 @@ export default function Card({
         </div>
       </div>
       <div className="flex justify-between items-center bg-[aqua] py-1 px-4">
-        <Link href={`post/${id}`}>
-          <p className="text-sm text-stone-800">Read more {">"}</p>
-        </Link>
+        <a
+          className="text-sm text-stone-800 hover:underline"
+          href={`post/${id}`}
+        >
+          Read more {">"}
+        </a>
         <p
           className="text-sm text-stone-800 cursor-pointer"
           onClick={handleDeleteClick}

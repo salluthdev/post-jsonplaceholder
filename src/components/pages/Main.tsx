@@ -34,6 +34,7 @@ export default function Main() {
       .then((data) => setNextPageLength(data.length));
   }, [currentPage]);
 
+  // delete post
   function handleDeletePost(id: number) {
     fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
       method: "DELETE",

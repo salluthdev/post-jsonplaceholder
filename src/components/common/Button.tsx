@@ -19,7 +19,7 @@ export default function Button({
 
   return (
     <button
-      className={`text-sm font-semibold rounded-sm py-2 px-4 ${variantClasses}`}
+      className={`text-sm font-semibold rounded-sm py-2 px-4 hover:scale-[1.04] active:scale-[0.96] duration-[0.2s] ${variantClasses}`}
       {...props}
     >
       {children}
