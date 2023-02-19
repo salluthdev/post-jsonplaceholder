@@ -1,14 +1,9 @@
 import { useEffect, useState } from "react";
-import { Button, Card } from "../common";
 import Pagination from "./Pagination";
+import PostsWrapper from "./PostsWrapper";
+import { Post } from "@/types/shared-types";
 
-type Post = {
-  id: number;
-  title: string;
-  body: string;
-};
-
-export default function CardWrapper() {
+export default function Main() {
   const [postData, setPostData] = useState<Post[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [nextPageLength, setNextPageLength] = useState<number>(0);
@@ -42,18 +37,7 @@ export default function CardWrapper() {
 
   return (
     <div className="wrapper">
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 justify-between gap-4 py-10">
-        {postData.map((item: Post) => {
-          return (
-            <div
-              key={item.id}
-              className="min-w-[100%] sm:min-w-[360px] flex-1 border-[2px] border-[aqua] rounded-sm"
-            >
-              <Card title={item.title} content={item.body} id={item.id} />
-            </div>
-          );
-        })}
-      </div>
+      <PostsWrapper postData={postData} />
       <Pagination
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
