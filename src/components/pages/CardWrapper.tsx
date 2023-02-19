@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button, Card } from "../common";
+import Pagination from "./Pagination";
 
 type Post = {
   id: number;
@@ -53,54 +54,11 @@ export default function CardWrapper() {
           );
         })}
       </div>
-      <div className="mb-10">
-        <div className="flex flex-wrap items-end gap-4">
-          {currentPage > 1 && (
-            <Button
-              variant="outline"
-              onClick={() => {
-                setCurrentPage(currentPage - 1);
-              }}
-            >
-              Prev
-            </Button>
-          )}
-
-          <div className="flex items-end gap-2">
-            {currentPage > 1 && (
-              <Button
-                variant="outline"
-                onClick={() => {
-                  setCurrentPage(currentPage - 1);
-                }}
-              >
-                {currentPage - 1}
-              </Button>
-            )}
-            <Button>{currentPage}</Button>
-            {nextPageLength !== 0 && (
-              <Button
-                variant="outline"
-                onClick={() => {
-                  setCurrentPage(currentPage + 1);
-                }}
-              >
-                {currentPage + 1}
-              </Button>
-            )}
-          </div>
-          {nextPageLength !== 0 && (
-            <Button
-              variant="outline"
-              onClick={() => {
-                setCurrentPage(currentPage + 1);
-              }}
-            >
-              Next
-            </Button>
-          )}
-        </div>
-      </div>
+      <Pagination
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        nextPageLength={nextPageLength}
+      />
     </div>
   );
 }
