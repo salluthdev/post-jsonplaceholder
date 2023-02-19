@@ -24,6 +24,17 @@ export default function Pagination({
         </Button>
       )}
       <div className="flex items-end gap-2">
+        {currentPage > 2 && (
+          <Button variant="outline" onClick={() => setCurrentPage(1)}>
+            1
+          </Button>
+        )}
+        {currentPage > 3 && (
+          <Button variant="outline" onClick={() => setCurrentPage(2)}>
+            2
+          </Button>
+        )}
+        {currentPage > 4 && <p className="font-bold text-stone-800">...</p>}
         {currentPage > 1 && (
           <Button
             variant="outline"
