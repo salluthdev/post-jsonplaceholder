@@ -1,4 +1,4 @@
-import { Button } from "../common";
+import { Button } from "../../common";
 
 interface PaginationProps {
   currentPage: number;

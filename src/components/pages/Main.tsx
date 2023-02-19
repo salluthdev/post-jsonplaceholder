@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import Pagination from "./Pagination";
-import PostsWrapper from "./PostsWrapper";
 import { Post } from "@/types/shared-types";
+import { Pagination, PostsWrapper } from "./components";
 
 export default function Main() {
   const [postData, setPostData] = useState<Post[]>([]);

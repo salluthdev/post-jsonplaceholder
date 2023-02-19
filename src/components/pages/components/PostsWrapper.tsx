@@ -1,5 +1,5 @@
 import { Post } from "@/types/shared-types";
-import { Card } from "../common";
+import { Card } from "../../common";
 
 interface PostsWrapperProps {
   postData: any;
