@@ -1,9 +1,10 @@
-import Link from "next/link";
+import { Post } from "@/types/shared-types";
 
 interface CardProps {
   title: string;
   content: string;
   id: number;
+  handleEditPost: (post: Post) => void;
   handleDeletePost: (id: number) => void;
 }
 
@@ -11,8 +12,12 @@ export default function Card({
   title,
   content,
   id,
+  handleEditPost,
   handleDeletePost,
 }: CardProps) {
+  function handleEditClick() {
+    handleEditPost({ title, body: content, id });
+  }
   function handleDeleteClick() {
     handleDeletePost(id);
   }
@@ -36,12 +41,21 @@ export default function Card({
         >
           Read more {">"}
         </a>
-        <p
-          className="text-sm text-stone-800 cursor-pointer"
-          onClick={handleDeleteClick}
-        >
-          Delete
-        </p>
+        <div className="flex items-center gap-1">
+          <p
+            className="text-sm text-stone-800 cursor-pointer hover:underline"
+            onClick={handleEditClick}
+          >
+            Edit
+          </p>
+          <p className="text-sm text-stone-800">|</p>
+          <p
+            className="text-sm text-stone-800 cursor-pointer hover:underline"
+            onClick={handleDeleteClick}
+          >
+            Delete
+          </p>
+        </div>
       </div>
     </div>
   );

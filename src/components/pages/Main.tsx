@@ -44,9 +44,40 @@ export default function Main() {
     });
   }
 
+  // edit post
+  function handleEditPost(post: Post) {
+    fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        id: 1,
+        title: "new title",
+        body: "new body here?",
+        userId: 1,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        const updatedData = postData.map((p) => {
+          if (p.id === post.id) {
+            return data;
+          } else {
+            return p;
+          }
+        });
+        setPostData(updatedData);
+      });
+  }
+
   return (
     <div className="wrapper">
-      <PostsWrapper postData={postData} handleDeletePost={handleDeletePost} />
+      <PostsWrapper
+        postData={postData}
+        handleEditPost={handleEditPost}
+        handleDeletePost={handleDeletePost}
+      />
       <Pagination
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}

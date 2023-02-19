@@ -3,11 +3,13 @@ import { Card } from "../../common";
 
 interface PostsWrapperProps {
   postData: Post[];
+  handleEditPost: (post: Post) => void;
   handleDeletePost: (id: number) => void;
 }
 
 export default function PostsWrapper({
   postData,
+  handleEditPost,
   handleDeletePost,
 }: PostsWrapperProps) {
   return (
@@ -19,6 +21,7 @@ export default function PostsWrapper({
               title={item.title}
               content={item.body}
               id={item.id}
+              handleEditPost={() => handleEditPost(item)}
               handleDeletePost={() => handleDeletePost(item.id)}
             />
           </div>
