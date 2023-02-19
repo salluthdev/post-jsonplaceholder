@@ -34,9 +34,18 @@ export default function Main() {
       .then((data) => setNextPageLength(data.length));
   }, [currentPage]);
 
+  function handleDeletePost(id: number) {
+    fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+      method: "DELETE",
+    }).then(() => {
+      const updatedData = postData.filter((post) => post.id !== id);
+      setPostData(updatedData);
+    });
+  }
+
   return (
     <div className="wrapper">
-      <PostsWrapper postData={postData} />
+      <PostsWrapper postData={postData} handleDeletePost={handleDeletePost} />
       <Pagination
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}

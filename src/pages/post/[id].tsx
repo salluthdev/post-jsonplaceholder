@@ -1,12 +1,17 @@
 import { Button } from "@/components/common";
 import { Navbar } from "@/components/common/layouts";
+import { Post } from "@/types/shared-types";
 import Link from "next/link";
+
+interface DetailsProps {
+  item: Post;
+}
 
 export const getStaticPaths = async () => {
   const res = await fetch("https://jsonplaceholder.typicode.com/posts");
   const data = await res.json();
 
-  const paths = data.map((item: any) => {
+  const paths = data.map((item: Post) => {
     return {
       params: { id: item.id.toString() },
     };
@@ -28,7 +33,7 @@ export const getStaticProps = async (context: any) => {
   };
 };
 
-const Details = ({ item }: any) => {
+const Details = ({ item }: DetailsProps) => {
   return (
     <div>
       <Navbar />
