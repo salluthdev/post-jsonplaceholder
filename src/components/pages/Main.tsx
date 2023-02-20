@@ -49,10 +49,8 @@ export default function Main() {
     fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}`, {
       method: "PUT",
       body: JSON.stringify({
-        id: 1,
         title: "new title",
         body: "new body here?",
-        userId: 1,
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
