@@ -6,6 +6,8 @@ export default function Main() {
   const [postData, setPostData] = useState<Post[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [nextPageLength, setNextPageLength] = useState<number>(0);
+  const [newTitle, setNewTitle] = useState<string>("");
+  const [newBody, setNewBody] = useState<string>("");
 
   useEffect(() => {
     // fetch the postData in active page
@@ -49,8 +51,8 @@ export default function Main() {
     fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}`, {
       method: "PUT",
       body: JSON.stringify({
-        title: "new title",
-        body: "new body here?",
+        title: newTitle,
+        body: newBody,
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -68,6 +70,14 @@ export default function Main() {
         setPostData(updatedData);
       });
   }
+  // set new post title
+  function handleNewTitleChange(newTitle: string) {
+    setNewTitle(newTitle);
+  }
+  // set new post body
+  function handleNewBodyChange(newBody: string) {
+    setNewBody(newBody);
+  }
 
   return (
     <div className="wrapper">
@@ -75,6 +85,10 @@ export default function Main() {
         postData={postData}
         handleEditPost={handleEditPost}
         handleDeletePost={handleDeletePost}
+        newTitle={newTitle}
+        setNewTitle={handleNewTitleChange}
+        newBody={newBody}
+        setNewBody={handleNewBodyChange}
       />
       <Pagination
         currentPage={currentPage}
