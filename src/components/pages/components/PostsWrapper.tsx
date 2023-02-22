@@ -20,7 +20,7 @@ export default function PostsWrapper({
   newBody,
   setNewBody,
 }: PostsWrapperProps) {
-  return (
+  return ( 
     <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 justify-between gap-4 py-10">
       {postData.map((item: Post) => {
         return (
